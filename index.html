@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+	<!-- <link rel="stylesheet" type="text/css" href="assets/css/style.css"> -->
+</head>
+<body>
+	<div id="heading">The Battle</div>
+	<div id="commandId"></div>
+	<div id="attackId"></div>
+	<div id="attackArea"></div>
+	<div id="defenceArea"></div>
+	
+	<div>Wins: <span id="winId"> 0 </span></div>
+	<div>Losses: <span id="lossId"> 0 </span></div>
+	
+
+	<div id="charPlatform"></div>
+<!-- 	<div class="hero" id="hero1" value="hero1"> Fighter 1 </div>
+	<div class="hero" id="hero2" value="hero2"> Fighter 2 </div>
+	<div class="hero" id="hero3" value="hero3"> Fighter 3 </div>
+	<div class="hero" id="hero4" value="hero4"> Fighter 4 </div>
+ -->
+	<button class="btn bg-light" id="resetId" value = "" > Reset </button>
+
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+	<script type="text/javascript">
+
+		// making sure the page is loaded before any action takes place
+		$(document).ready(function() {
+			// initializin parameters on the page load
+			var wins = 0;
+			var losses =0;
+			var heroLock = false;
+			var firstSelected = false;
+			var secondSelected = false;
+			var message = "";
+			
+				
+			// }
+
+			var hero1 = {
+				name : "Spider man",
+				healthPoint	: 110,
+				life: 12,
+				defeat : 8,
+				// box : 'style="background-color:red"';
+				// image: '<img>'
+			};
+			var hero2 = {
+				name : "Batman",
+				healthPoint	: 180,
+				life: 19,
+				defeat : 8,
+				// image: '<img>'
+			};
+			var hero3 = {
+				name : "Iron man",
+				healthPoint	: 120,
+				life: 7,
+				defeat : 5,
+				// image: '<img>'
+			};
+			var hero4 = {
+				name : "Wonder woman",
+				healthPoint	: 140,
+				life: 18,
+				defeat : 4,
+				// image: '<img>'
+			};
+
+			var attacker = {
+				name : "",
+				healthPoint	: 0,
+				life: 0,
+				defeat : 0,
+			};
+
+			var defender = {
+				name : "",
+				healthPoint	: 0,
+				life: 0,
+				defeat : 0,
+			};
+			// put all objects in an array
+			var allHeros = [hero1,hero2,hero3,hero4];
+
+			// show the objects on the display
+			function resetDisplay(){
+				for (var i = 0 ; i < allHeros.length ; i++){
+					console.log(allHeros[i].name);
+					var tmp = $("<div>");
+					tmp.html('<div class="hero" value =' + i + '>'+ allHeros[i].name + '</div>');
+					$("#charPlatform").append(tmp);
+				}
+			}
+			resetDisplay();
+
+			//function to initialize or reset the game
+			function reset() {
+				message = "choose your FIGHTER to start a battle!";
+				console.log(message);
+			}
+
+
+			//send message to the page
+			function command (str){
+				$("#commandId").html(str);
+			}
+
+			reset();
+
+			$(".hero").on('click', function() {
+
+				if (!firstSelected){
+					// var msg = "select the FIGHTER to start a battle!";
+					console.log("in the process of selecting first worrior");
+					firstSelected = true;
+
+					var invokedObj = allHeros[parseInt($(this).attr("value"))];
+					console.log("you just invoked     " + invokedObj.name)
+					// console.log($(this).attr("name"))
+					// console.log($(this).attr("value"));
+					// var tmp = $(this).attr("value");
+					// console.log(this.name)
+					attacker.name = invokedObj.name;
+					attacker.healthPoint = invokedObj.healthPoint;
+					attacker.life = invokedObj.life;
+					attacker.defeat = invokedObj.defeat;
+
+					updateDisplay();
+
+					// $(this).empty();
+					// attacker = $(this);
+					console.log("attacker name is     " + attacker.name);
+					$("#attackArea").html(attacker.name);
+					command("Now select the second character to battle against!"); 
+
+
+				} else if (!secondSelected){
+					
+					console.log("in the process of selecting defender worrior");
+
+					secondSelected = true;
+
+					var invokedObj = allHeros[parseInt($(this).attr("value"))];
+					console.log("you just invoked     " + invokedObj.name)
+					// console.log($(this).attr("name"))
+					// console.log($(this).attr("value"));
+					// var tmp = $(this).attr("value");
+					// console.log(this.name)
+					defender.name = invokedObj.name;
+					defender.healthPoint = invokedObj.healthPoint;
+					defender.life = invokedObj.life;
+					defender.defeat = invokedObj.defeat;
+
+					updateDisplay();
+
+					// $(this).empty();
+					// defender = $(this);
+					console.log("defender name is     " + defender.name);
+					$("#defenceArea").html(defender.name);
+					command("You may start your battle now!"); 
+
+
+				}
+				// command(msg);
+			});
+
+
+
+
+
+
+
+		});
+
+		
+	</script>
+
+</body>
+</html>
