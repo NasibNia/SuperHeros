@@ -37,7 +37,14 @@
 			var firstSelected = false;
 			var secondSelected = false;
 			var message = "";
-			
+			var atkCount = 0;
+			var score = 0;
+			var atkrScore ;
+			var dfndrScore ; 
+			var gameOver = false;
+			var fightCount = 0;
+
+
 				
 			// }
 
@@ -66,8 +73,8 @@
 			var hero4 = {
 				name : "Wonder woman",
 				healthPoint	: 140,
-				life: 18,
-				defeat : 4,
+				life: 4,
+				defeat : 18,
 				// image: '<img>'
 			};
 
@@ -120,13 +127,65 @@
 			function reset() {
 				message = "choose your FIGHTER to start a battle!";
 				console.log(message);
+				heroLock = false;
+				firstSelected = false;
+				secondSelected = false;
+				message = "";
+				atkCount = 0;
+				score = 0;
+				atkrScore ;
+				dfndrScore ; 
+				gameOver = false;
+				fightCount = 0;
+				touchedObj.isTouched = [false , false, false, false];
+				touchedObj.resetDisplay();
+
 			}
+
+			$(document).on('click', "#resetId", function() {
+				if(gameOver){
+
+					message = "choose your FIGHTER to start a battle!";
+					console.log(message);
+					heroLock = false;
+					firstSelected = false;
+					secondSelected = false;
+					message = "";
+					atkCount = 0;
+					score = 0;
+					atkrScore ;
+					dfndrScore ; 
+					gameOver = false;
+					fightCount = 0;
+					touchedObj.isTouched = [false , false, false, false];
+					touchedObj.resetDisplay();
+					attack.hideBtn();
+					$("#attackArea").empty();
+					$("#defenceArea").empty();
+
+				}
+			});
+
 
 
 			//send message to the page
 			function command (str){
 				$("#commandId").html(str);
 			}
+
+
+			//create an object for Attack: 
+			var attack = {
+				// image : '<img src="">'
+				displayBtn : function(){
+					// $("#attackId").html(this.image);
+					$("#attackId").text("ATTACK");
+				},
+				hideBtn : function(){
+					$("#attackId").empty();
+				}
+			};
+
 
 			// reset();
 			touchedObj.resetDisplay();
@@ -151,7 +210,9 @@
 					attacker.healthPoint = invokedObj.healthPoint;
 					attacker.life = invokedObj.life;
 					attacker.defeat = invokedObj.defeat;
-
+					
+					atkrScore = attacker.healthPoint ;
+					
 					
 
 					// $(this).empty();
@@ -166,6 +227,7 @@
 
 				} else if (!secondSelected){
 					
+					fightCount++; 
 					console.log("in the process of selecting defender worrior");
 
 					secondSelected = true;
@@ -181,6 +243,9 @@
 					defender.life = invokedObj.life;
 					defender.defeat = invokedObj.defeat;
 
+					dfndrScore = defender.healthPoint; 
+
+
 					// updateDisplay();
 
 					// $(this).empty();
@@ -192,9 +257,46 @@
 					touchedObj.isTouched[parseInt($(this).attr("value"))] = true;
 					touchedObj.resetDisplay();
 
+					//display attack button;
+					attack.displayBtn();
+
 
 				}
 				// command(msg);
+			});
+
+			$(document).on('click', "#attackId", function() {
+				if(!gameOver){
+					atkCount++;
+					atkrScore -=  defender.defeat ;
+					dfndrScore -= (attacker.life * atkCount); 
+					console.log("atkrScore. :  " + atkrScore);
+					console.log("dfndrScore. :  " + dfndrScore);
+					if (atkrScore <= 0) {
+						//reset the game; you lost
+						console.log("You lost; reset the game");
+						//update losses
+						losses++;
+						$("#lossId").text(losses);
+						gameOver = true;
+					} else if (dfndrScore <= 0){
+						//choose a new apponent
+						if (fightCount == 3){
+							command("Good Job, YOU ACTUALLY WON!"); 
+							wins++;
+							$("#winId").text(wins);
+							gameOver = true;
+							attack.hideBtn();
+
+						} else {
+							command("Good Job, choose another opponent!"); 
+							secondSelected = false;
+							attack.hideBtn();
+
+						}
+
+					}
+				}
 			});
 
 
