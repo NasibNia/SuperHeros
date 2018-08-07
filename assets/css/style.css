@@ -15,15 +15,87 @@ body ,html {
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+    font-family: 'Kaushan Script', cursive;
+	font-size: 40px;
+	font-style: strong;
+
 }
 
 #IM,#SM,#WW,#BM{
 	/*max-width: 50px;
-	margin*/: 5%;
+	margin: 5%;*/
 
-	width:  100px;
+	width:  200px;
+	height: 300px;
     /*height: 100px;*/
-    background-position: 50% 50%;
+    /*background-position: 50% 50%;*/
     background-repeat:   no-repeat;
     background-size:     cover;
+
+    margin-right: 28%;
+    margin-left: 28%;
+    padding-left: 30px;
+}
+
+
+#heading{
+
+	/*line-height: 100px;*/
+	font-family: 'Kaushan Script', cursive;
+	text-align: center;
+	font-size: 50px;
+	font-weight: 700;
+	font-style: bold;
+
+	color: black;
+
+}
+
+#attackArea , #defenceArea{
+
+	height: 310px;
+	align-content: center;
+
+}
+
+#charPlatform{
+	height: 300px;
+	/*align-items: center;*/
+	margin-right: 10%;
+    margin-left: 10%;
+    /*max-width: 100%*/
+	
+
+}
+
+#winId, #lossId, #resetId ,.col-md-4{
+	/*float: both;*/
+	/*height: 40px;*/
+	font-family: 'Kaushan Script', cursive;
+	font-size: 40px;
+	/*font-style: strong;*/
+	text-align: center;
+	padding-top: 10px;
+
+}
+
+#commandId {
+	height: 100px;
+	text-align: center;
+	font-family: 'Knewave', cursive;
+	font-size: 20px;
+	font-weight: 200;
+
+}
+
+#attackId{
+	height: 100px;
+	text-align: center;
+	font-family: 'Hanalei Fill', cursive;
+	font-size: 50px;
+	font-weight: 200;
+
+
+}
+
 }

@@ -12,9 +12,21 @@
 	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
 
 
+	<!-- <style>
+        div{
+            background-color: #eee;
+            min-height: 100px;
+            border: 1px black solid;
+        }
+        div:nth-child(odd){
+            background-color: #777;
+        }
+        </style> -->
+
+
 </head>
 <body>
-	<div id="heading">The Battle</div>
+	<!-- <div id="heading">The Battle</div>
 	<div id="commandId"></div>
 	<div id="attackId"></div>
 	<div id="attackArea"></div>
@@ -22,9 +34,38 @@
 	<div>Wins: <span id="winId"> 0 </span></div>
 	<div>Losses: <span id="lossId"> 0 </span></div>
 	<div  id="charPlatform"></div>
-	<button class="btn bg-light" id="resetId" value = "" > Reset </button>
+	<button class="btn bg-light" id="resetId" value = "" > Reset </button> -->
 
 	
+	<div class="container">
+		<!-- top row with the game heading -->
+		<div class="row" id="heading">
+			<div class="col-md-12"> Super Heros Battle! </div>
+		</div>
+		<!-- second row with 3 colomns in -->
+		<div class="row">
+			<!-- attacker platform -->
+			<div class="col-md-5" id="attackArea"></div>
+			<!-- attck and messaging platform -->
+			<div class="col-md-2">
+				<div class="row" id="commandId"></div>
+				<div class="row" id="attackId"></div>
+			</div>
+			<!-- defender pldatform -->
+			<div class="col-md-5" id="defenceArea"></div>	
+		</div>
+		<!-- third row where the pictures of fighters sit -->
+		<div class="row" id="charPlatform"><div class="col-md-1" ></div></div>
+		<!-- fourth row where the scores and reset button sits -->
+		<div class="row">
+			<div class="col-md-4">Wins: <span id="winId"> 0 </span></div>
+			<div class="col-md-4"> <button class="btn bg-light" id="resetId" value = "" > Reset </button></div>
+
+			<div class="col-md-4">Losses: <span id="lossId"> 0 </span></div>
+		</div>
+
+
+	</div>
 	
 
 

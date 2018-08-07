@@ -74,7 +74,7 @@ $(document).ready(function() {
 				if (this.isTouched [i] === false) {
 					console.log(allHeros[i].name);
 					var tmp = $("<div>");
-					tmp.html('<div class="hero" value =' + i + '>'+ allHeros[i].image + '</div>');
+					tmp.html('<div class="hero" style="margin-left:10%" style="margin-right:10%" value =' + i + '>'+ allHeros[i].image + '</div>');
 					$("#charPlatform").append(tmp);
 				}
 			}
