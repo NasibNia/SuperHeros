@@ -1,0 +1,256 @@
+// making sure the page is loaded before any action takes place
+$(document).ready(function() {
+	// initializin parameters on the page load
+	var wins = 0;
+	var losses =0;
+	var heroLock = false;
+	var firstSelected = false;
+	var secondSelected = false;
+	var message = "";
+	var atkCount = 0;
+	var score = 0;
+	var atkrScore ;
+	var dfndrScore ; 
+	var gameOver = false;
+	var fightCount = 0;
+
+
+		
+	// }
+
+	var hero1 = {
+		name : "Spider man",
+		healthPoint	: 110,
+		life: 12,
+		defeat : 8,
+		// box : 'style="background-color:red"';
+		// image: '<img>'
+	};
+	var hero2 = {
+		name : "Batman",
+		healthPoint	: 180,
+		life: 19,
+		defeat : 8,
+		// image: '<img>'
+	};
+	var hero3 = {
+		name : "Iron man",
+		healthPoint	: 120,
+		life: 7,
+		defeat : 5,
+		// image: '<img>'
+	};
+	var hero4 = {
+		name : "Wonder woman",
+		healthPoint	: 140,
+		life: 4,
+		defeat : 18,
+		// image: '<img>'
+	};
+
+	var attacker = {
+		name : "",
+		healthPoint	: 0,
+		life: 0,
+		defeat : 0,
+	};
+
+	var defender = {
+		name : "",
+		healthPoint	: 0,
+		life: 0,
+		defeat : 0,
+	};
+	// put all objects in an array
+	var allHeros = [hero1,hero2,hero3,hero4];
+
+	// show the objects on the display
+	var touchedObj = {
+		isTouched : [false , false, false, false],
+		resetDisplay : function() {
+			$("#charPlatform").empty();	
+			for (var i = 0 ; i < allHeros.length ; i++){
+				if (this.isTouched [i] === false) {
+					console.log(allHeros[i].name);
+					var tmp = $("<div>");
+					tmp.html('<div class="hero" value =' + i + '>'+ allHeros[i].name + '</div>');
+					$("#charPlatform").append(tmp);
+				}
+			}
+
+		}
+
+	};
+
+
+
+	//function to initialize or reset the game
+	function reset() {
+		message = "choose your FIGHTER to start a battle!";
+		console.log(message);
+		heroLock = false;
+		firstSelected = false;
+		secondSelected = false;
+		message = "";
+		atkCount = 0;
+		score = 0;
+		atkrScore ;
+		dfndrScore ; 
+		gameOver = false;
+		fightCount = 0;
+		touchedObj.isTouched = [false , false, false, false];
+		touchedObj.resetDisplay();
+
+	}
+
+	$(document).on('click', "#resetId", function() {
+		if(gameOver){
+
+			message = "choose your FIGHTER to start a battle!";
+			console.log(message);
+			heroLock = false;
+			firstSelected = false;
+			secondSelected = false;
+			message = "";
+			atkCount = 0;
+			score = 0;
+			atkrScore ;
+			dfndrScore ; 
+			gameOver = false;
+			fightCount = 0;
+			touchedObj.isTouched = [false , false, false, false];
+			touchedObj.resetDisplay();
+			attack.hideBtn();
+			$("#attackArea").empty();
+			$("#defenceArea").empty();
+
+		}
+	});
+
+
+
+	//send message to the page
+	function command (str){
+		$("#commandId").html(str);
+	}
+
+
+	//create an object for Attack: 
+	var attack = {
+		// image : '<img src="">'
+		displayBtn : function(){
+			// $("#attackId").html(this.image);
+			$("#attackId").text("ATTACK");
+		},
+		hideBtn : function(){
+			$("#attackId").empty();
+		}
+	};
+
+
+
+	touchedObj.resetDisplay();
+
+
+	$(document).on('click', ".hero", function() {
+		console.log("fs", firstSelected)
+		console.log("SS", secondSelected)
+
+		if (!firstSelected){
+			// var msg = "select the FIGHTER to start a battle!";
+			console.log("in the process of selecting first worrior");
+			firstSelected = true;
+
+			var invokedObj = allHeros[parseInt($(this).attr("value"))];
+			console.log("you just invoked     " + invokedObj.name);
+
+
+			attacker.name = invokedObj.name;
+			attacker.healthPoint = invokedObj.healthPoint;
+			attacker.life = invokedObj.life;
+			attacker.defeat = invokedObj.defeat;
+			
+			atkrScore = attacker.healthPoint ;
+			
+			
+
+			console.log("attacker name is     " + attacker.name);
+			$("#attackArea").html(attacker.name);
+			command("Now select the second character to battle against!"); 
+
+			
+			touchedObj.isTouched[parseInt($(this).attr("value"))] = true;
+			touchedObj.resetDisplay();
+
+		} else if (!secondSelected){
+			
+			fightCount++; 
+			console.log("in the process of selecting defender worrior");
+
+			secondSelected = true;
+			console.log($(this));
+
+			console.log(parseInt($(this).attr("value")));
+
+			var invokedObj = allHeros[parseInt($(this).attr("value"))];
+			console.log("you just invoked     " + invokedObj.name);
+			
+			defender.name = invokedObj.name;
+			defender.healthPoint = invokedObj.healthPoint;
+			defender.life = invokedObj.life;
+			defender.defeat = invokedObj.defeat;
+
+			dfndrScore = defender.healthPoint; 
+
+
+
+			console.log("defender name is     " + defender.name);
+			$("#defenceArea").html(defender.name);
+			command("You may start your battle now!"); 
+
+			touchedObj.isTouched[parseInt($(this).attr("value"))] = true;
+			touchedObj.resetDisplay();
+
+			//display attack button;
+			attack.displayBtn();
+
+
+		}
+
+	});
+
+	$(document).on('click', "#attackId", function() {
+		if(!gameOver){
+			atkCount++;
+			atkrScore -=  defender.defeat ;
+			dfndrScore -= (attacker.life * atkCount); 
+			console.log("atkrScore. :  " + atkrScore);
+			console.log("dfndrScore. :  " + dfndrScore);
+			if (atkrScore <= 0) {
+				//reset the game; you lost
+				console.log("You lost; reset the game");
+				//update losses
+				losses++;
+				$("#lossId").text(losses);
+				gameOver = true;
+			} else if (dfndrScore <= 0){
+				//choose a new apponent
+				if (fightCount == 3){
+					command("Good Job, YOU ACTUALLY WON!"); 
+					wins++;
+					$("#winId").text(wins);
+					gameOver = true;
+					attack.hideBtn();
+
+				} else {
+					command("Good Job, choose another opponent!"); 
+					secondSelected = false;
+					attack.hideBtn();
+
+				}
+
+			}
+		}
+	});
+
+});
