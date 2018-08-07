@@ -21,29 +21,29 @@ $(document).ready(function() {
 	var hero1 = {
 		name : "Spider man",
 		healthPoint	: 110,
-		life: 12,
+		life: 3,
 		defeat : 8,
 		image: '<img src="assets/images/SpiderMan.jpeg" id="SM">',
 	};
 	var hero2 = {
 		name : "Batman",
 		healthPoint	: 180,
-		life: 19,
-		defeat : 8,
+		life: 4,
+		defeat : 10,
 		image: '<img src="assets/images/BatMan2.jpeg" id="BM">'
 	};
 	var hero3 = {
 		name : "Iron man",
 		healthPoint	: 120,
-		life: 7,
+		life: 6,
 		defeat : 5,
 		image: '<img src="assets/images/IronMan.jpeg" id="IM">'
 	};
 	var hero4 = {
 		name : "Wonder woman",
 		healthPoint	: 140,
-		life: 4,
-		defeat : 18,
+		life: 8,
+		defeat : 12,
 		image: '<img src="assets/images/WonderWoman.jpeg" id="WW">'
 	};
 
@@ -124,6 +124,8 @@ $(document).ready(function() {
 			attack.hideBtn();
 			$("#attackArea").empty();
 			$("#defenceArea").empty();
+			$("#dfndScore").empty();
+			$("#atkScore").empty();
 
 		}
 	});
@@ -173,7 +175,7 @@ $(document).ready(function() {
 			attacker.image = invokedObj.image;
 			
 			atkrScore = attacker.healthPoint ;
-			
+			$("#atkScore").text(atkrScore);
 			
 
 			console.log("attacker name is     " + attacker.name);
@@ -204,12 +206,12 @@ $(document).ready(function() {
 			defender.image = invokedObj.image;
 
 			dfndrScore = defender.healthPoint; 
-
+			$("#dfndScore").text(dfndrScore);
 
 
 			console.log("defender name is     " + defender.name);
 			$("#defenceArea").html(defender.image);
-			command("You may start your battle now!"); 
+			command("You shall start your battle now, May evil forces be with you!"); 
 
 			touchedObj.isTouched[parseInt($(this).attr("value"))] = true;
 			touchedObj.resetDisplay();
@@ -227,6 +229,10 @@ $(document).ready(function() {
 			atkCount++;
 			atkrScore -=  defender.defeat ;
 			dfndrScore -= (attacker.life * atkCount); 
+
+			$("#atkScore").text(atkrScore);
+			$("#dfndScore").text(dfndrScore);
+
 			console.log("atkrScore. :  " + atkrScore);
 			console.log("dfndrScore. :  " + dfndrScore);
 			if (atkrScore <= 0) {

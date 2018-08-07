@@ -12,7 +12,7 @@
 	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
 
 
-	<!-- <style>
+<!-- 	<style>
         div{
             background-color: #eee;
             min-height: 100px;
@@ -45,20 +45,27 @@
 		<!-- second row with 3 colomns in -->
 		<div class="row">
 			<!-- attacker platform -->
-			<div class="col-md-5" id="attackArea"></div>
+			<div class="col-md-5">
+				<div class="row" id="attackArea"></div>
+				<div class="row" id="atkScore"></div>	
+			</div>
 			<!-- attck and messaging platform -->
 			<div class="col-md-2">
 				<div class="row" id="commandId"></div>
+				<div class="row" id="Bar"></div>
 				<div class="row" id="attackId"></div>
 			</div>
 			<!-- defender pldatform -->
-			<div class="col-md-5" id="defenceArea"></div>	
+			<div class="col-md-5">
+				<div class="row" id="defenceArea"></div>
+				<div class="row" id="dfndScore"></div>
+			</div>	
 		</div>
 		<!-- third row where the pictures of fighters sit -->
 		<div class="row" id="charPlatform"><div class="col-md-1" ></div></div>
 		<!-- fourth row where the scores and reset button sits -->
 		<div class="row">
-			<div class="col-md-4">Wins: <span id="winId"> 0 </span></div>
+			<div class="col-md-4" >Wins: <span id="winId"> 0 </span></div>
 			<div class="col-md-4"> <button class="btn bg-light" id="resetId" value = "" > Reset </button></div>
 
 			<div class="col-md-4">Losses: <span id="lossId"> 0 </span></div>

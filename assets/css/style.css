@@ -17,18 +17,15 @@ body ,html {
     background-size: cover;
     font-family: 'Kaushan Script', cursive;
 	font-size: 40px;
-	font-style: strong;
+	font-style: bold;
 
 }
 
 #IM,#SM,#WW,#BM{
-	/*max-width: 50px;
-	margin: 5%;*/
 
+	position: relative;
 	width:  200px;
 	height: 300px;
-    /*height: 100px;*/
-    /*background-position: 50% 50%;*/
     background-repeat:   no-repeat;
     background-size:     cover;
 
@@ -40,13 +37,11 @@ body ,html {
 
 #heading{
 
-	/*line-height: 100px;*/
 	font-family: 'Kaushan Script', cursive;
 	text-align: center;
 	font-size: 50px;
 	font-weight: 700;
 	font-style: bold;
-
 	color: black;
 
 }
@@ -76,6 +71,7 @@ body ,html {
 	/*font-style: strong;*/
 	text-align: center;
 	padding-top: 10px;
+	font-weight: 200;
 
 }
 
@@ -83,18 +79,29 @@ body ,html {
 	height: 100px;
 	text-align: center;
 	font-family: 'Knewave', cursive;
-	font-size: 20px;
+	font-size: 25px;
 	font-weight: 200;
+	padding-bottom: 20px;
+	max-width: 200%;
 
 }
 
-#attackId{
+#attackId , #Bar {
 	height: 100px;
 	text-align: center;
 	font-family: 'Hanalei Fill', cursive;
 	font-size: 50px;
 	font-weight: 200;
 
+
+}
+
+#atkScore, #dfndScore {
+	margin-left: 50%;
+	margin-right: 40%;
+	text-align: center;
+	background-color: #eae6da;
+	font-size: 25px;
 
 }
 
