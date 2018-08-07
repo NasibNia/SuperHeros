@@ -16,7 +16,7 @@
 	<div>Losses: <span id="lossId"> 0 </span></div>
 	
 
-	<div id="charPlatform"></div>
+	<div  id="charPlatform"></div>
 <!-- 	<div class="hero" id="hero1" value="hero1"> Fighter 1 </div>
 	<div class="hero" id="hero2" value="hero2"> Fighter 2 </div>
 	<div class="hero" id="hero3" value="hero3"> Fighter 3 </div>
@@ -88,15 +88,33 @@
 			var allHeros = [hero1,hero2,hero3,hero4];
 
 			// show the objects on the display
-			function resetDisplay(){
-				for (var i = 0 ; i < allHeros.length ; i++){
-					console.log(allHeros[i].name);
-					var tmp = $("<div>");
-					tmp.html('<div class="hero" value =' + i + '>'+ allHeros[i].name + '</div>');
-					$("#charPlatform").append(tmp);
+			// function resetDisplay(){
+			// 	for (var i = 0 ; i < allHeros.length ; i++){
+			// 		console.log(allHeros[i].name);
+			// 		var tmp = $("<div>");
+			// 		tmp.html('<div class="hero" value =' + i + '>'+ allHeros[i].name + '</div>');
+			// 		$("#charPlatform").append(tmp);
+			// 	}
+			// }
+
+			var touchedObj = {
+				isTouched : [false , false, false, false],
+				resetDisplay : function() {
+					$("#charPlatform").empty();	
+					for (var i = 0 ; i < allHeros.length ; i++){
+						if (this.isTouched [i] === false) {
+							console.log(allHeros[i].name);
+							var tmp = $("<div>");
+							tmp.html('<div class="hero" value =' + i + '>'+ allHeros[i].name + '</div>');
+							$("#charPlatform").append(tmp);
+						}
+					}
+
 				}
-			}
-			resetDisplay();
+
+			};
+
+			// touchedObj.resetDisplay();
 
 			//function to initialize or reset the game
 			function reset() {
@@ -110,9 +128,13 @@
 				$("#commandId").html(str);
 			}
 
-			reset();
+			// reset();
+			touchedObj.resetDisplay();
 
-			$(".hero").on('click', function() {
+
+			$(document).on('click', ".hero", function() {
+				console.log("fs", firstSelected)
+				console.log("SS", secondSelected)
 
 				if (!firstSelected){
 					// var msg = "select the FIGHTER to start a battle!";
@@ -120,7 +142,7 @@
 					firstSelected = true;
 
 					var invokedObj = allHeros[parseInt($(this).attr("value"))];
-					console.log("you just invoked     " + invokedObj.name)
+					console.log("you just invoked     " + invokedObj.name);
 					// console.log($(this).attr("name"))
 					// console.log($(this).attr("value"));
 					// var tmp = $(this).attr("value");
@@ -130,7 +152,7 @@
 					attacker.life = invokedObj.life;
 					attacker.defeat = invokedObj.defeat;
 
-					updateDisplay();
+					
 
 					// $(this).empty();
 					// attacker = $(this);
@@ -138,25 +160,28 @@
 					$("#attackArea").html(attacker.name);
 					command("Now select the second character to battle against!"); 
 
+					
+					touchedObj.isTouched[parseInt($(this).attr("value"))] = true;
+					touchedObj.resetDisplay();
 
 				} else if (!secondSelected){
 					
 					console.log("in the process of selecting defender worrior");
 
 					secondSelected = true;
+					console.log($(this));
+
+					console.log(parseInt($(this).attr("value")));
 
 					var invokedObj = allHeros[parseInt($(this).attr("value"))];
-					console.log("you just invoked     " + invokedObj.name)
-					// console.log($(this).attr("name"))
-					// console.log($(this).attr("value"));
-					// var tmp = $(this).attr("value");
-					// console.log(this.name)
+					console.log("you just invoked     " + invokedObj.name);
+					
 					defender.name = invokedObj.name;
 					defender.healthPoint = invokedObj.healthPoint;
 					defender.life = invokedObj.life;
 					defender.defeat = invokedObj.defeat;
 
-					updateDisplay();
+					// updateDisplay();
 
 					// $(this).empty();
 					// defender = $(this);
@@ -164,10 +189,15 @@
 					$("#defenceArea").html(defender.name);
 					command("You may start your battle now!"); 
 
+					touchedObj.isTouched[parseInt($(this).attr("value"))] = true;
+					touchedObj.resetDisplay();
+
 
 				}
 				// command(msg);
 			});
+
+
 
 
 
