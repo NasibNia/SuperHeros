@@ -23,29 +23,28 @@ $(document).ready(function() {
 		healthPoint	: 110,
 		life: 12,
 		defeat : 8,
-		// box : 'style="background-color:red"';
-		// image: '<img>'
+		image: '<img src="assets/images/SpiderMan.jpeg" id="SM">',
 	};
 	var hero2 = {
 		name : "Batman",
 		healthPoint	: 180,
 		life: 19,
 		defeat : 8,
-		// image: '<img>'
+		image: '<img src="assets/images/BatMan2.jpeg" id="BM">'
 	};
 	var hero3 = {
 		name : "Iron man",
 		healthPoint	: 120,
 		life: 7,
 		defeat : 5,
-		// image: '<img>'
+		image: '<img src="assets/images/IronMan.jpeg" id="IM">'
 	};
 	var hero4 = {
 		name : "Wonder woman",
 		healthPoint	: 140,
 		life: 4,
 		defeat : 18,
-		// image: '<img>'
+		image: '<img src="assets/images/WonderWoman.jpeg" id="WW">'
 	};
 
 	var attacker = {
@@ -53,6 +52,7 @@ $(document).ready(function() {
 		healthPoint	: 0,
 		life: 0,
 		defeat : 0,
+		image: '<img>'
 	};
 
 	var defender = {
@@ -60,6 +60,7 @@ $(document).ready(function() {
 		healthPoint	: 0,
 		life: 0,
 		defeat : 0,
+		image: '<img>'
 	};
 	// put all objects in an array
 	var allHeros = [hero1,hero2,hero3,hero4];
@@ -73,7 +74,7 @@ $(document).ready(function() {
 				if (this.isTouched [i] === false) {
 					console.log(allHeros[i].name);
 					var tmp = $("<div>");
-					tmp.html('<div class="hero" value =' + i + '>'+ allHeros[i].name + '</div>');
+					tmp.html('<div class="hero" value =' + i + '>'+ allHeros[i].image + '</div>');
 					$("#charPlatform").append(tmp);
 				}
 			}
@@ -169,13 +170,14 @@ $(document).ready(function() {
 			attacker.healthPoint = invokedObj.healthPoint;
 			attacker.life = invokedObj.life;
 			attacker.defeat = invokedObj.defeat;
+			attacker.image = invokedObj.image;
 			
 			atkrScore = attacker.healthPoint ;
 			
 			
 
 			console.log("attacker name is     " + attacker.name);
-			$("#attackArea").html(attacker.name);
+			$("#attackArea").html(attacker.image);
 			command("Now select the second character to battle against!"); 
 
 			
@@ -199,13 +201,14 @@ $(document).ready(function() {
 			defender.healthPoint = invokedObj.healthPoint;
 			defender.life = invokedObj.life;
 			defender.defeat = invokedObj.defeat;
+			defender.image = invokedObj.image;
 
 			dfndrScore = defender.healthPoint; 
 
 
 
 			console.log("defender name is     " + defender.name);
-			$("#defenceArea").html(defender.name);
+			$("#defenceArea").html(defender.image);
 			command("You may start your battle now!"); 
 
 			touchedObj.isTouched[parseInt($(this).attr("value"))] = true;

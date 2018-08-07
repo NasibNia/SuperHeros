@@ -1,0 +1,29 @@
+/*font-family: 'Hanalei Fill', cursive;
+
+font-family: 'Permanent Marker', cursive;
+
+font-family: 'Kaushan Script', cursive;
+font-family: 'Knewave', cursive;
+*/
+
+body ,html {
+	background: url("../images/action.JPG");
+	    /* Full height */
+    height: 100%; 
+
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#IM,#SM,#WW,#BM{
+	/*max-width: 50px;
+	margin*/: 5%;
+
+	width:  100px;
+    /*height: 100px;*/
+    background-position: 50% 50%;
+    background-repeat:   no-repeat;
+    background-size:     cover;
+}
