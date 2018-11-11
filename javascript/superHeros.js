@@ -225,7 +225,7 @@ $(document).ready(function() {
 	});
 
 	$(document).on('click', "#attackId", function() {
-		if(!gameOver){
+		if(!gameOver && atkrScore > 0 && dfndrScore > 0 ){
 			atkCount++;
 			atkrScore -=  defender.defeat ;
 			dfndrScore -= (attacker.life * atkCount); 
